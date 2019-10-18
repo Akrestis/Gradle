@@ -1,45 +1,38 @@
 package com.company;
 
-import com.company.data.Users;
-import com.company.data.Todos;
-import com.company.data.Albums;
-import com.company.data.Comments;
-import com.company.data.Photos;
-import com.company.data.Posts;
-
-import java.io.IOException;
-import java.util.List;
-
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static final String FILE_NAME = "test.txt";
 
-        //1) Написать класс MyApiService с использованием паттерна синглтон для доступа к API
+    public static void main(String[] args) {
 
-        MyApiService service = MyApiService.getInstance();
+        //3) Написать интерфейс Storage, и класс FileStorage,
+        //который в конструкторе принимает имя файла где будут храниться данные.
+        //Продемонстрирвоать работу всех методов.
+        //Данные должны храниться в тектовом файле в формате JSON.
+        //При добавлении метод addUser должен назначить User уникальный id - порядковый номер.
 
-        Posts posts = new Posts();
-        List<Posts> listPosts = service.getPosts();
-        System.out.println(posts.Print(listPosts));
 
-        Comments comments = new Comments();
-        List<Comments> listComments = service.getComments();
-        System.out.println(comments.Print(listComments));
+        FileStorage fileStorage = new FileStorage(FILE_NAME);
 
-        Albums albums = new Albums();
-        List<Albums> listAlbums = service.getAlbums();
-        System.out.println(albums.Print(listAlbums));
+        fileStorage.addUser(new User("Alex", 11));
+        fileStorage.addUser(new User("Ben", 22));
+        fileStorage.addUser(new User("Carl", 33));
+        fileStorage.addUser(new User("Dan", 44));
+        System.out.println(fileStorage.getAllUsers());
 
-        Photos photos = new Photos();
-        List<Photos> listPhotos = service.getPhotos();
-        System.out.println(photos.Print(listPhotos));
+        fileStorage.removeUser(2);
+        System.out.println(fileStorage.getAllUsers());
 
-        Todos todos = new Todos();
-        List<Todos> listTodos = service.getTodos();
-        System.out.println(todos.Print(listTodos));
+        fileStorage.removeUserByName("Ben");
+        System.out.println(fileStorage.getAllUsers());
 
-        Users users = new Users();
-        List<Users> listUsers = service.getUsers();
-        System.out.println(users.Print(listUsers));
+        fileStorage.updateUser(new User("Alex", 55));
+        System.out.println(fileStorage.getAllUsers());
+
+        System.out.println(fileStorage.getUser(0));
+
+        fileStorage.removeAll();
+        System.out.println(fileStorage.getAllUsers());
     }
 }
