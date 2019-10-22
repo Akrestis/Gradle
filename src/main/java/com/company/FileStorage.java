@@ -3,7 +3,6 @@ package com.company;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;

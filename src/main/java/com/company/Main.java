@@ -2,7 +2,7 @@ package com.company;
 
 public class Main {
 
-    public static final String FILE_NAME = "test.txt";
+    static final String FILE_NAME = "test.txt";
 
     public static void main(String[] args) {
 
